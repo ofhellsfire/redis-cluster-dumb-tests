@@ -1,0 +1,83 @@
+version: "3.8"
+
+networks:
+  redis_cluster: {}
+
+services:
+
+  redis-cluster-init:
+    image: "bitnami/redis-cluster:5.0.9-debian-10-r85"
+    depends_on:
+      - redis-node-0
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+      - redis-node-5
+    environment:
+      - 'REDIS_CLUSTER_REPLICAS=1'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_CLUSTER_CREATOR=yes'
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+    networks: 
+      - redis_cluster
+
+  redis-node-0:
+    image: "bitnami/redis-cluster:5.0.9-debian-10-r85"
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+    networks: 
+      - redis_cluster
+
+  redis-node-1:
+    image: "bitnami/redis-cluster:5.0.9-debian-10-r85"
+    ports:
+      - "16379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+    networks: 
+      - redis_cluster
+
+  redis-node-2:
+    image: "bitnami/redis-cluster:5.0.9-debian-10-r85"
+    ports:
+      - "26379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+    networks:
+      - redis_cluster
+
+  redis-node-3:
+    image: "bitnami/redis-cluster:5.0.9-debian-10-r85"
+    ports:
+      - "36379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+    networks:
+      - redis_cluster
+
+  redis-node-4:
+    image: "bitnami/redis-cluster:5.0.9-debian-10-r85"
+    ports:
+      - "46379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+    networks:
+      - redis_cluster
+
+  redis-node-5:
+    image: "bitnami/redis-cluster:5.0.9-debian-10-r85"
+    ports:
+      - "56379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+    networks:
+      - redis_cluster
