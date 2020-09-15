@@ -24,10 +24,6 @@ for i in range(5000):
     try:
         for key in rc.scan_iter(match='*', count=10):
             print(f'Key: {key}: {Datetime.now()}')
-#        msg = str(Datetime.now())
-#        rc.set(i, msg)
-#        sleep(1)
-#        print(f'Key: {i}; Message: {rc.get(i)}')
         sleep(1)
     except Exception as ex:
         traceback.print_exc()
